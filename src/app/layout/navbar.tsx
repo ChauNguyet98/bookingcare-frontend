@@ -10,7 +10,7 @@ class NavBar extends React.Component {
     show: false,
   };
 
-  showOffcanvas = (status) => {
+  showOffcanvas = (status: boolean) => {
     this.setState({
       show: status,
     });
