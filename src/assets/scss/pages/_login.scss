@@ -1,0 +1,21 @@
+.login {
+  @apply w-full h-screen flex justify-center items-center;
+  background-image: linear-gradient(to right, #3eadcf, #abe9cd);
+
+  form {
+    @apply w-96 px-8 py-10 rounded-2xl bg-white;
+  }
+
+  &__title {
+    @apply font-bold text-2xl leading-6 text-center mb-10 uppercase;
+  }
+
+  &__label {
+    @apply font-semibold;
+  }
+
+  &__btn {
+    @apply w-full rounded-full uppercase border-none;
+    background-image: linear-gradient(to right, #3eadcf, #abe9cd);
+  }
+}
