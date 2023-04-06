@@ -2,7 +2,12 @@ import { Component } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
-import { BsPersonCircle } from "react-icons/bs";
+import {
+  BsPersonCircle,
+  BsLockFill,
+  BsFillEyeFill,
+  BsFillEyeSlashFill,
+} from "react-icons/bs";
 
 class Login extends Component {
   constructor(props: any) {
@@ -12,6 +17,7 @@ class Login extends Component {
   state = {
     userName: "",
     password: "",
+    showPassword: false,
   };
 
   onUserNameChange = (event: any) => {
@@ -26,19 +32,25 @@ class Login extends Component {
     });
   };
 
+  onPasswordSatatusChange = (status: boolean) => {
+    this.setState({
+      showPassword: status,
+    });
+  };
+
   submitForm = () => {
     console.log(this.state);
   };
 
   render() {
-    const { userName, password } = this.state;
+    const { userName, password, showPassword } = this.state;
 
     return (
       <div className="login">
         <Form>
           <div className="login__title">Login</div>
           <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label className="login__label">Email address</Form.Label>
+            <Form.Label className="login__label">UserName</Form.Label>
             <InputGroup className="mb-3">
               <InputGroup.Text id="basic-addon1">
                 <BsPersonCircle />
@@ -55,16 +67,27 @@ class Login extends Component {
             </Form.Text> */}
           </Form.Group>
 
-          <Form.Group className="mb-3" controlId="formBasicPassword">
+          <Form.Group
+            className="mb-3 login__password"
+            controlId="formBasicPassword"
+          >
             <Form.Label className="login__label">Password</Form.Label>
             <InputGroup className="mb-3">
-              <InputGroup.Text id="basic-addon1">@</InputGroup.Text>
+              <InputGroup.Text id="basic-addon1">
+                <BsLockFill />
+              </InputGroup.Text>
               <Form.Control
-                type="password"
+                type={!showPassword ? "password" : "text"}
                 placeholder="Password"
                 value={password}
                 onChange={($event) => this.onPasswordChange($event)}
               />
+              <div
+                className="login__password--icon"
+                onClick={() => this.onPasswordSatatusChange(!showPassword)}
+              >
+                {!showPassword ? <BsFillEyeFill /> : <BsFillEyeSlashFill />}
+              </div>
             </InputGroup>
           </Form.Group>
 
@@ -72,7 +95,7 @@ class Login extends Component {
             <Form.Check type="checkbox" label="Remember Me" />
           </Form.Group>
           <Button
-            type="submit"
+            type="button"
             className="login__btn"
             onClick={() => this.submitForm()}
           >

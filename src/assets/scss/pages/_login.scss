@@ -4,6 +4,8 @@
 
   form {
     @apply w-96 px-8 py-10 rounded-2xl bg-white;
+
+
   }
 
   &__title {
@@ -13,6 +15,22 @@
   &__label {
     @apply font-semibold;
   }
+
+  &__password {
+    .input-group {
+      input {
+        @apply pr-9;
+        border-top-right-radius   : 0.375rem !important;
+        border-bottom-right-radius: 0.375rem !important;
+      }
+    }
+
+    &--icon {
+      @apply h-full pl-3 pr-3 flex justify-center items-center;
+      @apply absolute top-0 right-0 z-10 cursor-pointer;
+    }
+  }
+
 
   &__btn {
     @apply w-full rounded-full uppercase border-none;
