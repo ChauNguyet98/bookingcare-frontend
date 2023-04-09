@@ -1,7 +1,7 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
 
-class Admin extends React.Component {
+class AdminComponent extends React.Component {
   render() {
     return (
       <div>
@@ -11,4 +11,4 @@ class Admin extends React.Component {
   }
 }
 
-export default Admin;
+export default AdminComponent;

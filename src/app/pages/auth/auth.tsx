@@ -1,7 +1,7 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
 
-class Auth extends React.Component {
+class AuthComponent extends React.Component {
   render() {
     return (
       <div>
@@ -11,4 +11,4 @@ class Auth extends React.Component {
   }
 }
 
-export default Auth;
+export default AuthComponent;

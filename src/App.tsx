@@ -1,23 +1,26 @@
 import "./App.scss";
 // import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
 // import NavBar from "./layout/navbar";
-import { Navigate } from "react-router-dom";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Auth from "./app/pages/auth/auth";
-import Login from "./app/pages/auth/login/login";
-import Dashboard from "./app/pages/admin/dashboard/dashboard";
-import Admin from "./app/pages/admin/admin";
+import {
+  createBrowserRouter,
+  Navigate,
+  RouterProvider,
+} from "react-router-dom";
+import AdminComponent from "./app/pages/admin/admin";
+import DashboardComponent from "./app/pages/admin/dashboard/dashboard";
+import AuthComponent from "./app/pages/auth/auth";
+import LoginComponent from "./app/pages/auth/login/login";
 import { SYSTEM_CONST } from "./app/utils";
 
 function App() {
   const router = createBrowserRouter([
     {
       path: SYSTEM_CONST.ROUTE.AUTH.AUTH,
-      element: <Auth />,
+      element: <AuthComponent />,
       children: [
         {
           path: SYSTEM_CONST.ROUTE.AUTH.LOGIN,
-          element: <Login />,
+          element: <LoginComponent />,
         },
         {
           index: true,
@@ -28,11 +31,11 @@ function App() {
     },
     {
       path: SYSTEM_CONST.ROUTE.ADMIN.ADMIN,
-      element: <Admin />,
+      element: <AdminComponent />,
       children: [
         {
           path: SYSTEM_CONST.ROUTE.ADMIN.DASHBOARD,
-          element: <Dashboard />,
+          element: <DashboardComponent />,
         },
       ],
     },

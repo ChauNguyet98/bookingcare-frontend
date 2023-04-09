@@ -9,20 +9,25 @@ import {
   BsFillEyeSlashFill,
 } from "react-icons/bs";
 
-class Login extends Component {
+import AuthService from "../../../services/authService";
+import { Login } from "../../../models/auth.models";
+import axios from "axios";
+import { toast } from "react-toastify";
+
+class LoginComponent extends Component {
   constructor(props: any) {
     super(props);
   }
 
   state = {
-    userName: "",
+    email: "",
     password: "",
     showPassword: false,
   };
 
-  onUserNameChange = (event: any) => {
+  onEmailChange = (event: any) => {
     this.setState({
-      userName: event.target.value,
+      email: event.target.value,
     });
   };
 
@@ -40,26 +45,42 @@ class Login extends Component {
 
   submitForm = () => {
     console.log(this.state);
+    const loginData: Login = {
+      email: this.state.email,
+      password: this.state.password,
+    };
+
+    AuthService.login(loginData)
+      .then((data) => {
+        console.log(data);
+        toast.success("Login success!");
+      })
+      .catch((error) => {
+        console.log(error);
+        if (error.response.data.error.message) {
+          toast.error(error.response.data.error.message);
+        }
+      });
   };
 
   render() {
-    const { userName, password, showPassword } = this.state;
+    const { email, password, showPassword } = this.state;
 
     return (
       <div className="login">
         <Form>
           <div className="login__title">Login</div>
           <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label className="login__label">UserName</Form.Label>
+            <Form.Label className="login__label">Email</Form.Label>
             <InputGroup className="mb-3">
               <InputGroup.Text id="basic-addon1">
                 <BsPersonCircle />
               </InputGroup.Text>
               <Form.Control
                 type="text"
-                placeholder="UserName"
-                value={userName}
-                onChange={($event) => this.onUserNameChange($event)}
+                placeholder="Email"
+                value={email}
+                onChange={($event) => this.onEmailChange($event)}
               />
             </InputGroup>
             {/* <Form.Text className="text-muted">
@@ -107,4 +128,4 @@ class Login extends Component {
   }
 }
 
-export default Login;
+export default LoginComponent;
