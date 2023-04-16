@@ -3,19 +3,21 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import {
-  BsPersonCircle,
-  BsLockFill,
   BsFillEyeFill,
   BsFillEyeSlashFill,
+  BsLockFill,
+  BsPersonCircle,
 } from "react-icons/bs";
 
-import AuthService from "../../../services/authService";
+import { ConnectedProps, connect } from "react-redux";
 import { Login } from "../../../models/auth.models";
-import axios from "axios";
-import { toast } from "react-toastify";
+import { AuthService } from "../../../services/authService";
+import { LoginAction } from "../../../store/action";
+import { Navigate, useNavigate } from "react-router-dom";
+import { SYSTEM_CONST } from "../../../utils";
 
-class LoginComponent extends Component {
-  constructor(props: any) {
+class LoginComponent extends Component<Props> {
+  constructor(props: Props) {
     super(props);
   }
 
@@ -37,7 +39,7 @@ class LoginComponent extends Component {
     });
   };
 
-  onPasswordSatatusChange = (status: boolean) => {
+  onPasswordStatusChange = (status: boolean) => {
     this.setState({
       showPassword: status,
     });
@@ -53,12 +55,25 @@ class LoginComponent extends Component {
     AuthService.login(loginData)
       .then((data) => {
         console.log(data);
-        toast.success("Login success!");
+        this.props.loginSuccess(data.data.data.token);
+
+        console.log(this.props.token);
+
+        // if (this.props.token) {
+        const navigate = useNavigate();
+        navigate(
+          "/" +
+            SYSTEM_CONST.ROUTE.ADMIN.ADMIN +
+            "/" +
+            SYSTEM_CONST.ROUTE.ADMIN.DASHBOARD
+        );
+        // }
+        // toast.success("Login success!");
       })
       .catch((error) => {
         console.log(error);
         if (error.response.data.error.message) {
-          toast.error(error.response.data.error.message);
+          // toast.error(error.response.data.error.message);
         }
       });
   };
@@ -68,6 +83,10 @@ class LoginComponent extends Component {
 
     return (
       <div className="login">
+        {/* {this.props.token && (
+          <Navigate to={SYSTEM_CONST.ROUTE.ADMIN.ADMIN} replace={true} />
+        )} */}
+
         <Form>
           <div className="login__title">Login</div>
           <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -105,7 +124,7 @@ class LoginComponent extends Component {
               />
               <div
                 className="login__password--icon"
-                onClick={() => this.onPasswordSatatusChange(!showPassword)}
+                onClick={() => this.onPasswordStatusChange(!showPassword)}
               >
                 {!showPassword ? <BsFillEyeFill /> : <BsFillEyeSlashFill />}
               </div>
@@ -128,4 +147,26 @@ class LoginComponent extends Component {
   }
 }
 
-export default LoginComponent;
+const mapState = (state: any) => {
+  return {
+    // isOn: state.isOn
+    token: state.login.token,
+  };
+};
+
+const mapDispatch = (dispatch: any) => {
+  return {
+    // toggleOn: () => ({ type: 'TOGGLE_IS_ON' }),
+    loginSuccess: (token: string) => dispatch(LoginAction.LoginSuccess(token)),
+  };
+};
+
+const connector = connect(mapState, mapDispatch);
+
+// The inferred type will look like:
+// {isOn: boolean, toggleOn: () => void}
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+type Props = PropsFromRedux;
+
+export default connector(LoginComponent);

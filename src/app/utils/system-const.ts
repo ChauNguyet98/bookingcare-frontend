@@ -17,4 +17,10 @@ export class SYSTEM_CONST {
       DASHBOARD: "dashboard",
     },
   };
+
+  public static readonly STORAGE = {
+    TOKEN: "TOKEN",
+  };
+
+  public static readonly PI = 3.1415;
 }

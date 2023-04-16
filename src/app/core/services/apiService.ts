@@ -1,4 +1,4 @@
-import http from "../common/http-common";
+import { http } from "../common/http-common";
 
 const get = (url: string, params: any) => {
   return http.get(url, { params: params });
@@ -24,12 +24,10 @@ const del = (url: string) => {
   return http.delete(url);
 };
 
-const ApiService = {
+export const ApiService = {
   get,
   getArrayBuffer,
   post,
   put,
   del,
 };
-
-export default ApiService;
