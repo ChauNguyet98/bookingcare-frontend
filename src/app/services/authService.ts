@@ -1,4 +1,4 @@
-import { ApiService } from "../core/services/apiService";
+import { ApiService } from "../core";
 import { Login } from "../models/auth.models";
 import { SYSTEM_CONST } from "../utils";
 
