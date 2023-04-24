@@ -4,14 +4,12 @@ import {
   AxiosResponse,
   InternalAxiosRequestConfig,
 } from "axios";
+import { toast } from "react-toastify";
 import { store } from "../../store/store";
 
 const onRequest = (
   config: InternalAxiosRequestConfig
 ): InternalAxiosRequestConfig => {
-  // console.log("request");
-  // console.info(config);
-
   const token = store.getState().login.token;
   if (token) {
     config.headers["x-token"] = token;
@@ -21,20 +19,34 @@ const onRequest = (
 };
 
 const onRequestError = (error: AxiosError): Promise<AxiosError> => {
-  // console.log("request error");
-  // console.error(error);
   return Promise.reject(error);
 };
 
 const onResponse = (response: AxiosResponse): AxiosResponse => {
-  // console.log("response");
-  // console.info(response);
+  if (response?.status === 201) {
+    toast.success("Created successful!");
+  } else if (response.data.message) {
+    toast.success(response.data.message);
+  }
+
   return response;
 };
 
 const onResponseError = (error: AxiosError): Promise<AxiosError> => {
-  // console.log("response error");
-  // console.error(error);
+  const dataError: any = error?.response?.data;
+  if (
+    error?.response?.status === 500 ||
+    error?.response?.status === 404 ||
+    error?.response?.status === 403 ||
+    error?.response?.status === 401
+  ) {
+    if (dataError && dataError.error && dataError.error.message) {
+      toast.error(dataError.error.message);
+    } else {
+      toast.error(error.response.statusText);
+    }
+  }
+
   return Promise.reject(error);
 };
 

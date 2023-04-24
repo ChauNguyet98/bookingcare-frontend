@@ -52,16 +52,10 @@ class LoginComponent extends Component<Props> {
       password: this.state.password,
     };
 
-    AuthService.login(loginData)
-      .then((data) => {
-        this.props.loginSuccess(data.data.data.token);
-        toast.success("Login success!");
-      })
-      .catch((error) => {
-        if (error.response.data.error.message) {
-          toast.error(error.response.data.error.message);
-        }
-      });
+    AuthService.login(loginData).then((data) => {
+      toast.success("Login success!");
+      this.props.loginSuccess(data.data.data.token);
+    });
   };
 
   render() {

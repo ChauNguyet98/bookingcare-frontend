@@ -11,8 +11,14 @@ import DashboardComponent from "./app/pages/admin/dashboard/dashboard";
 import AuthComponent from "./app/pages/auth/auth";
 import LoginComponent from "./app/pages/auth/login/login";
 import { SYSTEM_CONST } from "./app/utils";
+import { ProtectedRoute, ProtectedRouteProps } from "./app/core";
 
 function App() {
+  const defaultProtectedRouteProps: Omit<ProtectedRouteProps, "outlet"> = {
+    authenticationPath:
+      "/" + SYSTEM_CONST.ROUTE.AUTH.AUTH + "/" + SYSTEM_CONST.ROUTE.AUTH.LOGIN,
+  };
+
   const router = createBrowserRouter([
     {
       path: SYSTEM_CONST.ROUTE.AUTH.AUTH,
@@ -35,7 +41,13 @@ function App() {
       children: [
         {
           path: SYSTEM_CONST.ROUTE.ADMIN.DASHBOARD,
-          element: <DashboardComponent />,
+          // element: <DashboardComponent />,
+          element: (
+            <ProtectedRoute
+              {...defaultProtectedRouteProps}
+              outlet={<DashboardComponent />}
+            />
+          ),
         },
       ],
     },
