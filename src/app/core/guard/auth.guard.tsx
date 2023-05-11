@@ -10,7 +10,10 @@ export const ProtectedRoute = ({
   authenticationPath,
   outlet,
 }: ProtectedRouteProps) => {
-  const token = store.getState().login.token;
+  const token = store.getState().auth.login.token;
+  console.log(token);
+
+  console.log(111);
 
   if (token) {
     return outlet;

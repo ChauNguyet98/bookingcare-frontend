@@ -1,7 +1,7 @@
 import { http } from "../common/http-common";
 
-const get = (url: string, params: any) => {
-  return http.get(url, { params: params });
+const get = (url: string, params?: any) => {
+  return http.get(url, { params: params ?? {} });
 };
 
 const getArrayBuffer = (url: string, params: any) => {

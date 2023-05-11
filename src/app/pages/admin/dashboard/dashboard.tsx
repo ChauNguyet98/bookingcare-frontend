@@ -3,11 +3,19 @@ import { store } from "../../../store/store";
 import { ApiService } from "../../../core";
 
 class DashboardComponent extends React.Component {
+  constructor(props: any) {
+    super(props);
+  }
+
   render() {
     console.log(store.getState());
-    ApiService.get("/welcome", {}).then((data) => console.log(data));
+    ApiService.get("/users").then((data) => console.log(data));
 
-    return <div>Dashboard</div>;
+    return (
+      <>
+        <div>Dashboard</div>
+      </>
+    );
   }
 }
 

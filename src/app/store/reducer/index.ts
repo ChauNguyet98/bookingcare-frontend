@@ -1,8 +1,16 @@
 import { combineReducers } from "@reduxjs/toolkit";
-import { loginReducer } from "./auth/loginReducer";
+import authReducers from "./auth";
+import { persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
 
-const reducers = combineReducers({
-  login: loginReducer,
+const rootPersistConfig = {
+  key: "root",
+  storage: storage,
+  whitelist: ["auth"],
+};
+
+const rootReducers = combineReducers({
+  auth: authReducers,
 });
 
-export default reducers;
+export default persistReducer(rootPersistConfig, rootReducers);

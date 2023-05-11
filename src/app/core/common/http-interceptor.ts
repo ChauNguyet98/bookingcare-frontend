@@ -10,7 +10,7 @@ import { store } from "../../store/store";
 const onRequest = (
   config: InternalAxiosRequestConfig
 ): InternalAxiosRequestConfig => {
-  const token = store.getState().login.token;
+  const token = store.getState().auth.login.token;
   if (token) {
     config.headers["x-token"] = token;
   }

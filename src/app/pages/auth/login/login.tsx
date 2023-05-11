@@ -138,7 +138,7 @@ class LoginComponent extends Component<Props> {
 const mapState = (state: any) => {
   return {
     // isOn: state.isOn
-    token: state.login.token,
+    token: state.auth.login.token,
   };
 };
 

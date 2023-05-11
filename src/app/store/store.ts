@@ -1,12 +1,15 @@
 import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
-import reducers from "./reducer";
+import rootReducers from "./reducer";
+import { persistStore } from "redux-persist";
 
 export const store = configureStore({
-  reducer: reducers,
+  reducer: rootReducers,
   // reducer: {
   //   counter: counterReducer,
   // },
 });
+
+export const persistor = persistStore(store);
 
 export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;
