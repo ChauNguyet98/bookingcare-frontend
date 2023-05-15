@@ -1,6 +1,4 @@
 import React from "react";
-import { store } from "../../../store/store";
-import { ApiService } from "../../../core";
 
 class DashboardComponent extends React.Component {
   constructor(props: any) {
@@ -8,12 +6,13 @@ class DashboardComponent extends React.Component {
   }
 
   render() {
-    console.log(store.getState());
-    ApiService.get("/users").then((data) => console.log(data));
+    // ApiService.get("/users").then((data) => console.log(data));
 
     return (
       <>
-        <div>Dashboard</div>
+        <div className="w-full h-full bg-white rounded-lg shadow-md">
+          Dashboard
+        </div>
       </>
     );
   }

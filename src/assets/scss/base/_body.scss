@@ -1,0 +1,7 @@
+body {
+    @apply w-screen h-screen;
+
+    #root {
+        @apply w-full h-[99%];
+    }
+}

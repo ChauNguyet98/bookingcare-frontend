@@ -54,7 +54,7 @@ function App() {
   ]);
 
   return (
-    <div>
+    <div className="w-full h-full">
       <RouterProvider router={router} />
       {/* <BrowserRouter>
         <NavBar />

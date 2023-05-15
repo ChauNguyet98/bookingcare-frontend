@@ -1,13 +1,9 @@
 import React from "react";
-import { Outlet } from "react-router-dom";
+import LayoutComponent from "../../components/layouts/layout";
 
 class AdminComponent extends React.Component {
   render() {
-    return (
-      <div>
-        <Outlet />
-      </div>
-    );
+    return <LayoutComponent></LayoutComponent>;
   }
 }
 
