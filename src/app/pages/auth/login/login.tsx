@@ -90,9 +90,6 @@ class LoginComponent extends Component<Props> {
                 onChange={($event) => this.onEmailChange($event)}
               />
             </InputGroup>
-            {/* <Form.Text className="text-muted">
-              We'll never share your email with anyone else.
-            </Form.Text> */}
           </Form.Group>
 
           <Form.Group
@@ -137,22 +134,18 @@ class LoginComponent extends Component<Props> {
 
 const mapState = (state: any) => {
   return {
-    // isOn: state.isOn
     token: state.auth.login.token,
   };
 };
 
 const mapDispatch = (dispatch: any) => {
   return {
-    // toggleOn: () => ({ type: 'TOGGLE_IS_ON' }),
     loginSuccess: (token: string) => dispatch(LoginAction.LoginSuccess(token)),
   };
 };
 
 const connector = connect(mapState, mapDispatch);
 
-// The inferred type will look like:
-// {isOn: boolean, toggleOn: () => void}
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
 type Props = PropsFromRedux;

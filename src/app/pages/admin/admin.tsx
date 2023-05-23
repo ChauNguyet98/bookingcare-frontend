@@ -1,5 +1,5 @@
 import React from "react";
-import LayoutComponent from "../../components/layouts/layout";
+import LayoutComponent from "../../layout/layout";
 
 class AdminComponent extends React.Component {
   render() {
